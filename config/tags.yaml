@@ -1,0 +1,6 @@
+apriltag_detector:
+  ros__parameters:
+    image_transport: raw
+    family: 36h11
+    size: 0.1
+    tags: [0, 1, 2, 3, 4, 5]

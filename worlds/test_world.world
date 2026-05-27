@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="bodega_zigzag">
+    <include><uri>model://sun</uri></include>
+    <include><uri>model://ground_plane</uri></include>
+
+    <model name="perimetro">
+      <static>true</static>
+      <link name="norte">
+        <pose>0 2.0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></visual>
+      </link>
+      <link name="sur">
+        <pose>0 -2.0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></visual>
+      </link>
+      <link name="oeste">
+        <pose>-2.5 0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></visual>
+      </link>
+      <link name="este">
+        <pose>2.5 0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="muros_internos">
+      <static>true</static>
+      <link name="interno_izq">
+        <pose>-1.125 0.625 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></visual>
+      </link>
+      <link name="interno_der">
+        <pose>1.125 -0.625 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></visual>
+      </link>
+    </model>
+  </world>
+</sdf>

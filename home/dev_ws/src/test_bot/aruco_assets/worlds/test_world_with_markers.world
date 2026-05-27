@@ -1,0 +1,527 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="default">
+
+    <!-- Iluminacion / suelo -->
+    <include><uri>model://sun</uri></include>
+    <include><uri>model://ground_plane</uri></include>
+
+    <physics name="default_physics" default="0" type="ode">
+      <gravity>0 0 -9.8</gravity>
+      <max_step_size>0.001</max_step_size>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+
+    <scene>
+      <ambient>0.6 0.6 0.6 1</ambient>
+      <background>0.7 0.7 0.8 1</background>
+      <shadows>1</shadows>
+    </scene>
+
+    <!-- ====== Paredes externas ====== -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>5.0 0.05 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>5.0 0.05 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -2.0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>5.0 0.05 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>5.0 0.05 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_east">
+      <static>true</static>
+      <pose>2.5 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.05 4.0 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>0.05 4.0 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-2.5 0 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.05 4.0 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>0.05 4.0 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <!-- ====== Paredes internas ====== -->
+    <model name="wall_inner_left">
+      <static>true</static>
+      <pose>-1.125 0.625 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <model name="wall_inner_right">
+      <static>true</static>
+      <pose>1.125 -0.625 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual    name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ====== Marcadores ArUco (inline) ====== -->
+    <model name="aruco_marker_0">
+      <static>true</static>
+      <pose>-2.0000 1.9400 0.3000 1.570796 0.000000 0.000000</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id0</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_1">
+      <static>true</static>
+      <pose>-0.7000 1.9400 0.3000 1.570796 0.000000 0.000000</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id1</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_2">
+      <static>true</static>
+      <pose>0.7000 1.9400 0.3000 1.570796 0.000000 0.000000</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id2</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_3">
+      <static>true</static>
+      <pose>2.0000 1.9400 0.3000 1.570796 0.000000 0.000000</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id3</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_4">
+      <static>true</static>
+      <pose>-2.0000 -1.9400 0.3000 1.570796 0.000000 3.141593</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id4</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_5">
+      <static>true</static>
+      <pose>-0.7000 -1.9400 0.3000 1.570796 0.000000 3.141593</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id5</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_6">
+      <static>true</static>
+      <pose>0.7000 -1.9400 0.3000 1.570796 0.000000 3.141593</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id6</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_7">
+      <static>true</static>
+      <pose>2.0000 -1.9400 0.3000 1.570796 0.000000 3.141593</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id7</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_8">
+      <static>true</static>
+      <pose>-2.4400 -1.5000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id8</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_9">
+      <static>true</static>
+      <pose>-2.4400 0.0000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id9</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_10">
+      <static>true</static>
+      <pose>-2.4400 1.5000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id10</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_11">
+      <static>true</static>
+      <pose>2.4400 -1.5000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id11</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_12">
+      <static>true</static>
+      <pose>2.4400 0.0000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id12</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_13">
+      <static>true</static>
+      <pose>2.4400 1.5000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id13</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_14">
+      <static>true</static>
+      <pose>-0.9900 1.3000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id14</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_15">
+      <static>true</static>
+      <pose>-0.9900 0.0000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id15</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_16">
+      <static>true</static>
+      <pose>-1.2600 1.3000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id16</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_17">
+      <static>true</static>
+      <pose>0.9900 -1.3000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id17</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_18">
+      <static>true</static>
+      <pose>0.9900 0.0000 0.3000 1.570796 0.000000 -1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id18</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+    <model name="aruco_marker_19">
+      <static>true</static>
+      <pose>1.2600 -1.3000 0.3000 1.570796 0.000000 1.570796</pose>
+      <link name="link">
+        <visual name="v">
+          <cast_shadows>false</cast_shadows>
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <material>
+            <script>
+              <uri>model://aruco_markers/materials/scripts</uri>
+              <uri>model://aruco_markers/materials/textures</uri>
+              <name>ArucoMarker/Id19</name>
+            </script>
+          </material>
+        </visual>
+        <!-- collision opcional; si choca con algo lo puedes comentar -->
+        <collision name="c">
+          <geometry><box><size>0.15 0.15 0.005</size></box></geometry>
+          <surface><contact><collide_bitmask>0x00</collide_bitmask></contact></surface>
+        </collision>
+      </link>
+    </model>
+
+  </world>
+</sdf>

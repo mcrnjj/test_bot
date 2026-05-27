@@ -1,0 +1,380 @@
+material ArucoMarker/Id0
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_0.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id1
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_1.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id2
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_2.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id3
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_3.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id4
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_4.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id5
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_5.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id6
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_6.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id7
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_7.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id8
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_8.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id9
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_9.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id10
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_10.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id11
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_11.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id12
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_12.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id13
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_13.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id14
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_14.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id15
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_15.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id16
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_16.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id17
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_17.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id18
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_18.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}
+material ArucoMarker/Id19
+{
+  technique
+  {
+    pass
+    {
+      lighting on
+      ambient  1 1 1 1
+      diffuse  1 1 1 1
+      specular 0 0 0 1 0
+      texture_unit
+      {
+        texture marker_19.png
+        filtering none
+        rotate 0
+      }
+    }
+  }
+}

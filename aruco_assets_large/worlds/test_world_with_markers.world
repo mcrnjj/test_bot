@@ -1,0 +1,147 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <world name="bodega_zigzag">
+    <include><uri>model://sun</uri></include>
+    <include><uri>model://ground_plane</uri></include>
+
+    <model name="perimetro">
+      <static>true</static>
+      <link name="norte">
+        <pose>0 2.0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></visual>
+      </link>
+      <link name="sur">
+        <pose>0 -2.0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>5.0 0.1 1.0</size></box></geometry></visual>
+      </link>
+      <link name="oeste">
+        <pose>-2.5 0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></visual>
+      </link>
+      <link name="este">
+        <pose>2.5 0 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.1 4.0 1.0</size></box></geometry></visual>
+      </link>
+    </model>
+
+    <model name="muros_internos">
+      <static>true</static>
+      <link name="interno_izq">
+        <pose>-1.125 0.625 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></visual>
+      </link>
+      <link name="interno_der">
+        <pose>1.125 -0.625 0.5 0 0 0</pose>
+        <collision name="c"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.25 2.75 1.0</size></box></geometry></visual>
+      </link>
+    </model>
+  
+    <!-- ArUco fiducial markers (auto-generated) -->
+    <include>
+      <name>aruco_marker_0</name>
+      <uri>model://aruco_marker_0</uri>
+      <pose>-2.0 1.94 0.3 1.5707963267948963 0.0 0.0</pose>
+    </include>
+    <include>
+      <name>aruco_marker_1</name>
+      <uri>model://aruco_marker_1</uri>
+      <pose>-0.7 1.94 0.3 1.5707963267948963 0.0 0.0</pose>
+    </include>
+    <include>
+      <name>aruco_marker_2</name>
+      <uri>model://aruco_marker_2</uri>
+      <pose>0.7 1.94 0.3 1.5707963267948963 0.0 0.0</pose>
+    </include>
+    <include>
+      <name>aruco_marker_3</name>
+      <uri>model://aruco_marker_3</uri>
+      <pose>2.0 1.94 0.3 1.5707963267948963 0.0 0.0</pose>
+    </include>
+    <include>
+      <name>aruco_marker_4</name>
+      <uri>model://aruco_marker_4</uri>
+      <pose>-2.0 -1.94 0.3 1.5707963267948963 0.0 3.141592653589793</pose>
+    </include>
+    <include>
+      <name>aruco_marker_5</name>
+      <uri>model://aruco_marker_5</uri>
+      <pose>-0.7 -1.94 0.3 1.5707963267948963 0.0 3.141592653589793</pose>
+    </include>
+    <include>
+      <name>aruco_marker_6</name>
+      <uri>model://aruco_marker_6</uri>
+      <pose>0.7 -1.94 0.3 1.5707963267948963 0.0 3.141592653589793</pose>
+    </include>
+    <include>
+      <name>aruco_marker_7</name>
+      <uri>model://aruco_marker_7</uri>
+      <pose>2.0 -1.94 0.3 1.5707963267948963 0.0 3.141592653589793</pose>
+    </include>
+    <include>
+      <name>aruco_marker_8</name>
+      <uri>model://aruco_marker_8</uri>
+      <pose>-2.44 -1.5 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_9</name>
+      <uri>model://aruco_marker_9</uri>
+      <pose>-2.44 0.0 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_10</name>
+      <uri>model://aruco_marker_10</uri>
+      <pose>-2.44 1.5 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_11</name>
+      <uri>model://aruco_marker_11</uri>
+      <pose>2.44 -1.5 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_12</name>
+      <uri>model://aruco_marker_12</uri>
+      <pose>2.44 0.0 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_13</name>
+      <uri>model://aruco_marker_13</uri>
+      <pose>2.44 1.5 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_14</name>
+      <uri>model://aruco_marker_14</uri>
+      <pose>-0.99 1.3 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_15</name>
+      <uri>model://aruco_marker_15</uri>
+      <pose>-0.99 0.0 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_16</name>
+      <uri>model://aruco_marker_16</uri>
+      <pose>-1.26 1.3 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_17</name>
+      <uri>model://aruco_marker_17</uri>
+      <pose>0.99 -1.3 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_18</name>
+      <uri>model://aruco_marker_18</uri>
+      <pose>0.99 0.0 0.3 1.5707963267948963 0.0 -1.5707963267948963</pose>
+    </include>
+    <include>
+      <name>aruco_marker_19</name>
+      <uri>model://aruco_marker_19</uri>
+      <pose>1.26 -1.3 0.3 1.5707963267948963 0.0 1.5707963267948963</pose>
+    </include>
+  </world>
+</sdf>
