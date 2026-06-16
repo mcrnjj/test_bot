@@ -1,4 +1,4 @@
-image: /home/manuelc/dev_ws/src/test_bot/config/test_map.png
+image: test_map_large.png
 resolution: 0.05
 origin: [-2.5, -2.0, 0.0]
 negate: 0

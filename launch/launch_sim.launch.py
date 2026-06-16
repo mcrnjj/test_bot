@@ -55,7 +55,7 @@ def generate_launch_description():
     delayed_spawn = TimerAction(period=5.0, actions=[spawn_entity])
 
     return LaunchDescription([
-        DeclareLaunchArgument('map_name', default_value='small'),
+        DeclareLaunchArgument('map_name', default_value='large'),
         DeclareLaunchArgument(
             'world',
             default_value=[pkg_path, '/aruco_assets_', map_name, '/worlds/test_world_with_markers.world']

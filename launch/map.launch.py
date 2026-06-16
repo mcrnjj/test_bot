@@ -21,7 +21,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='true'),
-        DeclareLaunchArgument('map_name', default_value='small'),
+        DeclareLaunchArgument('map_name', default_value='large'),
         DeclareLaunchArgument('map_file', default_value=[PKG, '/config/test_map_', map_name, '.yaml']),
         DeclareLaunchArgument('markers_db', default_value=[PKG, '/aruco_assets_', map_name, '/config/markers_db.yaml']),
         DeclareLaunchArgument('nav2_params', default_value=f'{PKG}/config/nav2_params.yaml'),
