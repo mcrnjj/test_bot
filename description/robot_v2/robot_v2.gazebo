@@ -1,39 +1,34 @@
 <?xml version="1.0"?>
 <!--
     Plugins y propiedades Gazebo para robot_v2 (Foxy / Gazebo Classic 11).
-    Reemplaza al libgazebo_ros_control + transmisiones del export Fusion por el
-    mismo esquema que usa test_bot:
-      - diff_drive  -> /cmd_vel, /odom
-      - camera      -> /camera/image_raw, /camera/camera_info (frame optico)
-      - imu         -> /imu/data
+    Version ros2_control (claude_description): usa gazebo_ros2_control +
+    diff_drive_controller (ver config/controllers.yaml) en lugar del plugin
+    libgazebo_ros_diff_drive.
 
-    NOTA: wheel_separation y wheel_diameter estan derivados del export
-    (separation ~0.169 m, ruedas de 65 mm). Verificar/afinar en simulacion.
-    Si el robot gira al reves, intercambiar left_joint/right_joint.
+      - gazebo_ros2_control -> controller_manager dentro de Gazebo.
+        Los controladores (joint_state_broadcaster, diff_drive_controller) se
+        cargan desde launch_sim.launch.py con spawner.py.
+      - camera -> /camera/image_raw, /camera/camera_info (frame optico).
+      - imu    -> /imu/data.
+
+    Topics del diff_drive_controller (por defecto, relativos al nombre del
+    controlador):
+        cmd_vel  IN : /diff_drive_controller/cmd_vel_unstamped (Twist)
+        odom    OUT : /diff_drive_controller/odom
+    enable_odom_tf (en controllers.yaml) controla la TF odom->base_link.
+
+    NOTA geometria: wheel_separation/radius viven en controllers.yaml
+    (derivados del export: sep ~0.169 m, ruedas 65 mm). Si gira al reves,
+    intercambiar left_wheel_names/right_wheel_names en controllers.yaml.
 -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <!-- ============================ DIFF DRIVE ============================ -->
+  <!-- ======================= ros2_control (Gazebo) ===================== -->
   <gazebo>
-    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
-      <left_joint>left_wheel_joint</left_joint>
-      <right_joint>right_wheel_joint</right_joint>
-      <wheel_separation>0.169</wheel_separation>
-      <wheel_diameter>0.065</wheel_diameter>
-
-      <max_wheel_torque>20</max_wheel_torque>
-      <max_wheel_acceleration>2.0</max_wheel_acceleration>
-
-      <odometry_frame>odom</odometry_frame>
-      <robot_base_frame>base_link</robot_base_frame>
-
-      <publish_odom>true</publish_odom>
-      <!-- false: el EKF (map.launch) publica odom->base_link. Para sim SOLO con
-           launch_sim (sin EKF), pon true para ver el robot en RViz. -->
-      <publish_odom_tf>false</publish_odom_tf>
-      <publish_wheel_tf>true</publish_wheel_tf>
-
-      <update_rate>50.0</update_rate>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>$(find test_bot)/config/controllers.yaml</parameters>
     </plugin>
   </gazebo>
 
@@ -111,8 +106,21 @@
     <mu2>1.0</mu2>
   </gazebo>
 
-  <!-- Caster esferico sin friccion -->
-  <gazebo reference="esfera_deslizante_1">
+  <!-- Caster / bola deslizante sin friccion -->
+  <gazebo reference="sim_caster_v8_1">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+  </gazebo>
+  <gazebo reference="bola_v1_1">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="esfera_deslizante">
     <material>Gazebo/Grey</material>
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>

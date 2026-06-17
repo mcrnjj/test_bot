@@ -1,0 +1,69 @@
+# ros2_control / diff_drive_controller para robot_v2 (claude_description).
+# Lo carga el plugin gazebo_ros2_control (ver description/robot_v2/robot_v2.gazebo)
+# y lo activan los spawner.py de launch_sim.launch.py.
+#
+# Topics (relativos al nombre del controlador 'diff_drive_controller'):
+#   IN  : /diff_drive_controller/cmd_vel_unstamped  (geometry_msgs/Twist)
+#   OUT : /diff_drive_controller/odom
+#
+# Para teleoperar:
+#   ros2 run teleop_twist_keyboard teleop_twist_keyboard \
+#       --ros-args -r /cmd_vel:=/diff_drive_controller/cmd_vel_unstamped
+#
+# Para el stack completo (map.launch: ekf + nav2):
+#   - poner enable_odom_tf: false (que el EKF publique odom->base_link),
+#     y apuntar el EKF a /diff_drive_controller/odom (o remapear).
+
+controller_manager:
+  ros__parameters:
+    update_rate: 50          # Hz
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+
+diff_drive_controller:
+  ros__parameters:
+    left_wheel_names:  ["left_wheel_joint"]
+    right_wheel_names: ["right_wheel_joint"]
+
+    # Geometria derivada del export (VERIFICAR/AFINAR en sim):
+    #   - separacion entre puntos de contacto ~0.169 m
+    #   - rueda de 65 mm -> radio 0.0325 m
+    wheel_separation: 0.169
+    wheel_radius: 0.0325
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    publish_rate: 50.0
+    odom_frame_id: odom
+    base_frame_id: base_link
+    # true: util para probar el modelo SOLO con launch_sim (TF odom->base_link).
+    # Poner false al usar el EKF de map.launch para evitar doble TF.
+    enable_odom_tf: true
+    open_loop: false
+
+    # Foxy: false -> Twist en ~/cmd_vel_unstamped
+    use_stamped_vel: false
+    cmd_vel_timeout: 0.5
+
+    pose_covariance_diagonal:  [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+    twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.01]
+
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 1.0
+        has_acceleration_limits: true
+        max_acceleration: 1.0
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 3.0
+        has_acceleration_limits: true
+        max_acceleration: 3.0

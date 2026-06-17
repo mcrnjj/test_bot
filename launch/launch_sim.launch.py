@@ -1,7 +1,10 @@
 import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, SetEnvironmentVariable, TimerAction
+from launch.actions import (IncludeLaunchDescription, DeclareLaunchArgument,
+                            SetEnvironmentVariable, TimerAction,
+                            RegisterEventHandler)
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
@@ -24,8 +27,8 @@ def generate_launch_description():
                pkg_path, '/aruco_assets_', map_name, '/models']
     )
 
-    # Modelo realista (export Fusion360). Para volver al modelo simple,
-    # cambia 'robot_v2.urdf.xacro' por 'robot.urdf.xacro'.
+    # Modelo realista (export Fusion360, version ros2_control). Para volver al
+    # modelo simple, exporta ROBOT_MODEL=robot.urdf.xacro antes de lanzar.
     model_file = os.environ.get('ROBOT_MODEL', 'robot_v2.urdf.xacro')
     xacro_file = os.path.join(pkg_path, 'description', model_file)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
@@ -61,6 +64,24 @@ def generate_launch_description():
 
     delayed_spawn = TimerAction(period=5.0, actions=[spawn_entity])
 
+    # --- ros2_control: cargar controladores tras spawnear el robot ---
+    # (el controller_manager lo crea el plugin gazebo_ros2_control al spawnear).
+    # Foxy: el ejecutable del spawner es 'spawner.py'.
+    load_joint_state_broadcaster = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['joint_state_broadcaster',
+                   '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+    load_diff_drive_controller = Node(
+        package='controller_manager',
+        executable='spawner.py',
+        arguments=['diff_drive_controller',
+                   '--controller-manager', '/controller_manager'],
+        output='screen',
+    )
+
     return LaunchDescription([
         DeclareLaunchArgument('map_name', default_value='large'),
         DeclareLaunchArgument(
@@ -74,4 +95,17 @@ def generate_launch_description():
         gazebo,
         node_robot_state_publisher,
         delayed_spawn,
+        # Encadenar: spawn -> joint_state_broadcaster -> diff_drive_controller
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=spawn_entity,
+                on_exit=[load_joint_state_broadcaster],
+            )
+        ),
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_broadcaster,
+                on_exit=[load_diff_drive_controller],
+            )
+        ),
     ])
