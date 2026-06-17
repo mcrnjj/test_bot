@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+    Plugins y propiedades Gazebo para robot_v2 (Foxy / Gazebo Classic 11).
+    Reemplaza al libgazebo_ros_control + transmisiones del export Fusion por el
+    mismo esquema que usa test_bot:
+      - diff_drive  -> /cmd_vel, /odom
+      - camera      -> /camera/image_raw, /camera/camera_info (frame optico)
+      - imu         -> /imu/data
+
+    NOTA: wheel_separation y wheel_diameter estan derivados del export
+    (separation ~0.169 m, ruedas de 65 mm). Verificar/afinar en simulacion.
+    Si el robot gira al reves, intercambiar left_joint/right_joint.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- ============================ DIFF DRIVE ============================ -->
+  <gazebo>
+    <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.169</wheel_separation>
+      <wheel_diameter>0.065</wheel_diameter>
+
+      <max_wheel_torque>20</max_wheel_torque>
+      <max_wheel_acceleration>2.0</max_wheel_acceleration>
+
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+
+      <publish_odom>true</publish_odom>
+      <!-- false: el EKF (map.launch) publica odom->base_link. Para sim SOLO con
+           launch_sim (sin EKF), pon true para ver el robot en RViz. -->
+      <publish_odom_tf>false</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+
+      <update_rate>50.0</update_rate>
+    </plugin>
+  </gazebo>
+
+  <!-- ============================== CAMARA ============================== -->
+  <gazebo reference="camera_link">
+    <material>Gazebo/Red</material>
+    <sensor name="camera" type="camera">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.3439</horizontal_fov>
+        <image>
+          <format>R8G8B8</format>
+          <width>1280</width>
+          <height>720</height>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>8.0</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <frame_name>camera_link_optical</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- =============================== IMU =============================== -->
+  <gazebo reference="imu_link">
+    <material>Gazebo/Orange</material>
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>false</visualize>
+      <imu>
+        <angular_velocity>
+          <x><noise type="gaussian"><mean>0.0</mean><stddev>0.05</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0.0</mean><stddev>0.112</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0.0</mean><stddev>0.073</stddev></noise></z>
+        </angular_velocity>
+        <linear_acceleration>
+          <x><noise type="gaussian"><mean>0.0</mean><stddev>0.008</stddev></noise></x>
+          <y><noise type="gaussian"><mean>0.0</mean><stddev>0.011</stddev></noise></y>
+          <z><noise type="gaussian"><mean>0.0</mean><stddev>0.013</stddev></noise></z>
+        </linear_acceleration>
+      </imu>
+      <plugin name="imu_plugin" filename="libgazebo_ros_imu_sensor.so">
+        <ros>
+          <remapping>~/out:=imu/data</remapping>
+        </ros>
+        <initial_orientation_as_reference>false</initial_orientation_as_reference>
+        <frame_name>imu_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- ===================== MATERIALES / FRICCION ====================== -->
+  <gazebo reference="body_link">
+    <material>Gazebo/Silver</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <!-- Ruedas con traccion (mu alto) -->
+  <gazebo reference="65mmWheel_v3_1">
+    <material>Gazebo/Black</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+  <gazebo reference="65mmWheel_v3__1__1">
+    <material>Gazebo/Black</material>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+  </gazebo>
+
+  <!-- Caster esferico sin friccion -->
+  <gazebo reference="esfera_deslizante_1">
+    <material>Gazebo/Grey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+</robot>

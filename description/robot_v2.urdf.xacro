@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!--
+    robot_v2.urdf.xacro - Wrapper del modelo realista (export Fusion360) para
+    simulacion en test_bot (Foxy / Gazebo Classic).
+
+    Aporta lo que el export NO trae y que el stack de test_bot necesita:
+      - base_footprint (root, a ras de suelo) y base_link (eje de ruedas).
+      - Reorientacion del cuerpo: el modelo Fusion tiene el FRENTE en +Y; aqui
+        se rota -90 deg en Z para que el frente quede en +X (convencion ROS,
+        requerido por diff_drive y nav2).
+      - camera_link + camera_link_optical (frame optico que usa aruco_localizer).
+      - imu_link.
+      - Plugins Gazebo (diff_drive, camera, imu) via robot_v2.gazebo.
+
+    GEOMETRIA DERIVADA DEL EXPORT (verificar/afinar en sim):
+      - base_link colocado en el punto medio del eje de ruedas.
+      - Ruedas: diametro 0.065 m, separacion ~0.169 m, eje a 0.0325 m del suelo.
+      - Offsets base_link->body_link calculados a partir de los frames del export.
+-->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+  <!-- ============================ MATERIALES =========================== -->
+  <material name="silver"><color rgba="0.700 0.700 0.700 1.0"/></material>
+  <material name="black"><color rgba="0.05 0.05 0.05 1.0"/></material>
+  <material name="red"><color rgba="0.8 0.1 0.1 1.0"/></material>
+  <material name="orange"><color rgba="1.0 0.55 0.0 1.0"/></material>
+  <material name="grey"><color rgba="0.4 0.4 0.4 1.0"/></material>
+
+  <!-- ===================== CUERPO + GAZEBO (export) ==================== -->
+  <xacro:include filename="robot_v2/body.xacro"/>
+  <xacro:include filename="robot_v2/robot_v2.gazebo"/>
+
+  <!-- =========================== FRAMES ROS =========================== -->
+  <!-- base_footprint: root a ras de suelo. -->
+  <link name="base_footprint"/>
+
+  <!-- base_link: en el eje de ruedas, a una altura = radio de rueda (0.0325 m). -->
+  <link name="base_link"/>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.0325" rpy="0 0 0"/>
+  </joint>
+
+  <!-- base_link -> body_link (cuerpo Fusion):
+       rpy(0,0,-pi/2) pone el frente (+Y del modelo) en +X (ROS).
+       xyz coloca base_link en el punto medio del eje de ruedas. -->
+  <joint name="body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="body_link"/>
+    <origin xyz="0.047 0.08 0.084" rpy="0 0 -1.5707963267948966"/>
+  </joint>
+
+  <!-- =========================== CAMARA =============================== -->
+  <!-- camera_link: en el sensor IMX219, rotado para que +X apunte al frente
+       (+Y del cuerpo). El sensor de Gazebo mira a lo largo de +X de camera_link. -->
+  <link name="camera_link"/>
+  <joint name="camera_joint" type="fixed">
+    <parent link="imx219_v2_1"/>
+    <child link="camera_link"/>
+    <origin xyz="0 0 0" rpy="0 0 1.5707963267948966"/>
+  </joint>
+
+  <!-- camera_link_optical: convencion optica estandar (z hacia adelante). -->
+  <link name="camera_link_optical"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_link_optical"/>
+    <origin xyz="0 0 0" rpy="-1.5707963267948966 0 -1.5707963267948966"/>
+  </joint>
+
+  <!-- ============================= IMU ================================ -->
+  <link name="imu_link"/>
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  </joint>
+
+</robot>

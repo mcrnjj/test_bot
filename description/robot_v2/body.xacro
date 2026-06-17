@@ -1,0 +1,518 @@
+<?xml version="1.0" ?>
+<robot name="robot_v2_urdf" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- Fragmento de cuerpo del robot_v2 (export Fusion360), adaptado para test_bot:
+     - root 'base_link' renombrado a 'body_link' (el wrapper aporta base_link/base_footprint).
+     - rutas de mesh apuntan a package://test_bot/description/meshes.
+     - joints de rueda 'Revolute 17/18' renombrados a right/left_wheel_joint.
+     - SIN includes de materials/trans/gazebo (los aporta robot_v2.urdf.xacro). -->
+<link name="body_link">
+  <inertial>
+    <origin xyz="0.07999793829634734 -0.08217324688613672 -0.031732035126308164" rpy="0 0 0"/>
+    <mass value="0.23691895742036542"/>
+    <inertia ixx="0.000915" iyy="0.000822" izz="0.001442" ixy="0.0" iyz="-6e-06" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="imx219_v2_1">
+  <inertial>
+    <origin xyz="5.298261829267403e-13 -0.3408797650478147 -0.0633165023546077" rpy="0 0 0"/>
+    <mass value="0.002890233659902139"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.08 -0.17 -0.033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/imx219_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.08 -0.17 -0.033" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/imx219_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sim_pcb_v5_1">
+  <inertial>
+    <origin xyz="0.005446033831341776 -0.06629459333377805 0.0007999999999999946" rpy="0 0 0"/>
+    <mass value="0.03448451604792163"/>
+    <inertia ixx="2.3e-05" iyy="4.8e-05" izz="7.2e-05" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.08 -0.0 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_pcb_v5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.08 -0.0 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_pcb_v5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_jetson_v14_1">
+  <inertial>
+    <origin xyz="-0.04074999956831679 0.03270662873081401 0.02042642457055248" rpy="0 0 0"/>
+    <mass value="0.02558385260067285"/>
+    <inertia ixx="2e-05" iyy="2.4e-05" izz="3.9e-05" ixy="-0.0" iyz="-2e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.12075 0.158 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_jetson_v14_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.12075 0.158 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_jetson_v14_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tof_v2_1">
+  <inertial>
+    <origin xyz="0.0017742688065044837 -0.0010000000000001674 -0.007199999999996636" rpy="0 0 0"/>
+    <mass value="0.0007139772143634346"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0545 0.169 0.0258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/tof_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0545 0.169 0.0258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/tof_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tof_v2__1__1">
+  <inertial>
+    <origin xyz="-0.0017742688065042894 -0.001000000000000223 -0.007200000000003436" rpy="0 0 0"/>
+    <mass value="0.0007139772143634346"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1055 0.17 0.0258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/tof_v2__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1055 0.17 0.0258" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/tof_v2__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sim_UBEC_v2_1">
+  <inertial>
+    <origin xyz="0.028000000000000004 -0.29300000000000026 -0.11050000000000007" rpy="0 0 0"/>
+    <mass value="0.6716460000000001"/>
+    <inertia ixx="0.000172" iyy="0.000255" izz="0.00032" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.053 -0.157 -0.063" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_UBEC_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.053 -0.157 -0.063" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_UBEC_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sim_driver_v1_1">
+  <inertial>
+    <origin xyz="0.019650000000000008 -0.08055000000000007 -0.11250000000000007" rpy="0 0 0"/>
+    <mass value="0.3918955499999999"/>
+    <inertia ixx="8.4e-05" iyy="8.4e-05" izz="0.000121" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.06155 -0.0501 -0.063" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_driver_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.06155 -0.0501 -0.063" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_driver_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="bateria_nueva_v2_1">
+  <inertial>
+    <origin xyz="-2.7755575615628914e-17 -0.17700000000000013 -0.14750000000000008" rpy="0 0 0"/>
+    <mass value="0.7777466"/>
+    <inertia ixx="0.000137" iyy="0.000635" izz="0.000648" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.08 -0.085 -0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/bateria_nueva_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.08 -0.085 -0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/bateria_nueva_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Soporte_Motor_v1_1">
+  <inertial>
+    <origin xyz="0.0005972838958799576 0.007999999776517747 -0.008657844507264048" rpy="0 0 0"/>
+    <mass value="0.034146906737689504"/>
+    <inertia ixx="5e-06" iyy="7e-06" izz="6e-06" ixy="0.0" iyz="-0.0" ixz="2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1365 0.055 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/Soporte_Motor_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1365 0.055 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/Soporte_Motor_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="Soporte_Motor_v1__1__1">
+  <inertial>
+    <origin xyz="-0.0005972838958799923 -0.008000000223552697 -0.008657844507264048" rpy="0 0 0"/>
+    <mass value="0.034146906737689504"/>
+    <inertia ixx="5e-06" iyy="7e-06" izz="6e-06" ixy="0.0" iyz="0.0" ixz="-2e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0235 0.039 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/Soporte_Motor_v1__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0235 0.039 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/Soporte_Motor_v1__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="JGA25-370_-_JGA25-370_v2_1">
+  <inertial>
+    <origin xyz="-0.07529895541399692 0.13025115452527203 -0.10199946938736966" rpy="0 0 0"/>
+    <mass value="0.1902223225076236"/>
+    <inertia ixx="1.4e-05" iyy="4.9e-05" izz="4.9e-05" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.1935 0.17725 -0.018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/JGA25-370_-_JGA25-370_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.1935 0.17725 -0.018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/JGA25-370_-_JGA25-370_v2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="JGA25-370_-_JGA25-370_v2__1__1">
+  <inertial>
+    <origin xyz="0.07529895541399687 -0.0032511549723070188 -0.10199946938736966" rpy="0 0 0"/>
+    <mass value="0.1902223225076236"/>
+    <inertia ixx="1.4e-05" iyy="4.9e-05" izz="4.9e-05" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0335 0.04375 -0.018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/JGA25-370_-_JGA25-370_v2__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.0335 0.04375 -0.018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/JGA25-370_-_JGA25-370_v2__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="65mmWheel_v3__1__1">
+  <inertial>
+    <origin xyz="0.12671012264833226 0.04700001151136251 0.15450000161423427" rpy="0 0 0"/>
+    <mass value="0.2761201763508263"/>
+    <inertia ixx="0.000202" iyy="0.000121" izz="0.000121" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.038 0.094 0.2385" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/65mmWheel_v3__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.038 0.094 0.2385" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/65mmWheel_v3__1__1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="65mmWheel_v3_1">
+  <inertial>
+    <origin xyz="-0.12671012264833234 -0.04700001195839747 0.005500001614234279" rpy="0 0 0"/>
+    <mass value="0.2761201763508263"/>
+    <inertia ixx="0.000202" iyy="0.000121" izz="0.000121" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.122 0.0 0.0895" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/65mmWheel_v3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.122 0.0 0.0895" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/65mmWheel_v3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="base_rueda_omni_v4_1">
+  <inertial>
+    <origin xyz="-0.009999999979910162 0.010000000351775173 -0.01832075571984504" rpy="0 0 0"/>
+    <mass value="0.010989991428000697"/>
+    <inertia ixx="2e-06" iyy="2e-06" izz="2e-06" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.09 0.147 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_rueda_omni_v4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.09 0.147 0.066" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/base_rueda_omni_v4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sim_caster_v7_1">
+  <inertial>
+    <origin xyz="-0.011649938340071692 -0.011649938044252545 -0.003324314430276934" rpy="0 0 0"/>
+    <mass value="0.00517152232374024"/>
+    <inertia ixx="0.0" iyy="0.0" izz="1e-06" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.09165 0.12535 0.1018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_caster_v7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.09165 0.12535 0.1018" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_caster_v7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sim_jet_v1_1">
+  <inertial>
+    <origin xyz="0.03362621121374997 0.04737614639030725 0.015003273349308899" rpy="0 0 0"/>
+    <mass value="1.8835067699533863"/>
+    <inertia ixx="0.00171" iyy="0.001146" izz="0.002573" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.051 0.158 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_jet_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.051 0.158 -0.04" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://test_bot/description/meshes/sim_jet_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid 4" type="fixed">
+  <origin xyz="0.08 0.17 0.033" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="imx219_v2_1"/>
+</joint>
+
+<joint name="Rigid 6" type="fixed">
+  <origin xyz="0.08 0.0 0.0" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="sim_pcb_v5_1"/>
+</joint>
+
+<joint name="Rigid 7" type="fixed">
+  <origin xyz="0.12075 -0.158 0.0" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="base_jetson_v14_1"/>
+</joint>
+
+<joint name="Rigid 8" type="fixed">
+  <origin xyz="0.0545 -0.169 -0.0258" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="tof_v2_1"/>
+</joint>
+
+<joint name="Rigid 9" type="fixed">
+  <origin xyz="0.1055 -0.17 -0.0258" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="tof_v2__1__1"/>
+</joint>
+
+<joint name="Rigid 10" type="fixed">
+  <origin xyz="0.053 0.157 0.063" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="sim_UBEC_v2_1"/>
+</joint>
+
+<joint name="Rigid 11" type="fixed">
+  <origin xyz="0.06155 0.0501 0.063" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="sim_driver_v1_1"/>
+</joint>
+
+<joint name="Rigid 12" type="fixed">
+  <origin xyz="0.08 0.085 0.066" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="bateria_nueva_v2_1"/>
+</joint>
+
+<joint name="Rigid 13" type="fixed">
+  <origin xyz="0.1365 -0.055 -0.066" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="Soporte_Motor_v1_1"/>
+</joint>
+
+<joint name="Rigid 14" type="fixed">
+  <origin xyz="0.0235 -0.039 -0.066" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="Soporte_Motor_v1__1__1"/>
+</joint>
+
+<joint name="Rigid 15" type="fixed">
+  <origin xyz="0.057 -0.12225 0.084" rpy="0 0 0"/>
+  <parent link="Soporte_Motor_v1_1"/>
+  <child link="JGA25-370_-_JGA25-370_v2_1"/>
+</joint>
+
+<joint name="Rigid 16" type="fixed">
+  <origin xyz="-0.057 -0.00475 0.084" rpy="0 0 0"/>
+  <parent link="Soporte_Motor_v1__1__1"/>
+  <child link="JGA25-370_-_JGA25-370_v2__1__1"/>
+</joint>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="-0.1555 0.08325 -0.2565" rpy="0 0 0"/>
+  <parent link="JGA25-370_-_JGA25-370_v2_1"/>
+  <child link="65mmWheel_v3__1__1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="0.1555 0.04375 -0.1075" rpy="0 0 0"/>
+  <parent link="JGA25-370_-_JGA25-370_v2__1__1"/>
+  <child link="65mmWheel_v3_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="Rigid 19" type="fixed">
+  <origin xyz="0.09 -0.147 -0.066" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="base_rueda_omni_v4_1"/>
+</joint>
+
+<joint name="Rigid 20" type="fixed">
+  <origin xyz="0.00165 0.02165 -0.0358" rpy="0 0 0"/>
+  <parent link="base_rueda_omni_v4_1"/>
+  <child link="sim_caster_v7_1"/>
+</joint>
+
+<joint name="Rigid 21" type="fixed">
+  <origin xyz="-0.06975 0.0 0.04" rpy="0 0 0"/>
+  <parent link="base_jetson_v14_1"/>
+  <child link="sim_jet_v1_1"/>
+</joint>
+
+<link name="esfera_deslizante_1">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.01"/>
+    <inertia ixx="1.2e-07" iyy="1.2e-07" izz="1.2e-07" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="0.00555"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <sphere radius="0.00555"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="Rigid_esfera_deslizante" type="fixed">
+  <origin xyz="0.08 -0.137 -0.116236" rpy="0 0 0"/>
+  <parent link="body_link"/>
+  <child link="esfera_deslizante_1"/>
+</joint>
+
+</robot>

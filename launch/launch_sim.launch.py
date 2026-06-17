@@ -24,7 +24,10 @@ def generate_launch_description():
                pkg_path, '/aruco_assets_', map_name, '/models']
     )
 
-    xacro_file = os.path.join(pkg_path, 'description', 'robot.urdf.xacro')
+    # Modelo realista (export Fusion360). Para volver al modelo simple,
+    # cambia 'robot_v2.urdf.xacro' por 'robot.urdf.xacro'.
+    model_file = os.environ.get('ROBOT_MODEL', 'robot_v2.urdf.xacro')
+    xacro_file = os.path.join(pkg_path, 'description', model_file)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
 
     gazebo = IncludeLaunchDescription(
