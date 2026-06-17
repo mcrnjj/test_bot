@@ -29,6 +29,10 @@ def generate_launch_description():
     model_file = os.environ.get('ROBOT_MODEL', 'robot_v2.urdf.xacro')
     xacro_file = os.path.join(pkg_path, 'description', model_file)
     robot_description_raw = xacro.process_file(xacro_file).toxml()
+    # Resolve package:// URIs to absolute paths so Gazebo/OGRE can load the STL meshes
+    robot_description_raw = robot_description_raw.replace(
+        'package://test_bot/', pkg_path + '/'
+    )
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
